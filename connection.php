@@ -17,4 +17,26 @@
 		@mysqli_close($connection) or die(mysqli_error($connection));
 
 	}
+
+	// Protege contra SQL Injection
+	function DBEscape($data){
+
+		$connection = DBConnect();
+
+		if (!is_array($data)) {
+			$data = mysqli_real_escape_string($connection, $data);
+		}else{
+			$array = $data;
+
+			foreach ($array as $key => $value) {
+				$key = mysqli_real_escape_string($connection, $key);
+				$value = mysqli_real_escape_string($connection, $value);
+
+				$data[$key] = $value;
+			}
+		}
+
+		DBClose($connection);
+		return $data;
+	}
 ?>

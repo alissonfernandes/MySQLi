@@ -8,9 +8,18 @@
 	<?php
 		require 'config.php';
 		require 'connection.php';
+		require 'database.php';
 
-		$con = DBConnect();
-		DBClose($con);
+	$nome = "Alisson 'Fernandes'...";
+	$data = array(
+		'nome' => "Alisson Fernandes",
+		'idade' => 19
+	 	);
+
+	$sql = "insert into clientes (nome) values (''Alisson 'Fernandes')";
+
+	
+	var_dump(DBExecute($sql));
 	?>
 
 </body>
