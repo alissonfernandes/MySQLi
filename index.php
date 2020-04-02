@@ -10,16 +10,16 @@
 		require 'connection.php';
 		require 'database.php';
 
-	$nome = "Alisson 'Fernandes'...";
-	$data = array(
-		'nome' => "Alisson Fernandes",
-		'idade' => 19
-	 	);
-
-	$sql = "insert into clientes (nome) values (''Alisson 'Fernandes')";
-
+		$cliente = array(
+			'nome' => 'Lucas Silva',
+			'email' => 'lucasSilvacontato@coderwb.com' ,
+			'idade' => 19,
+			'status' => 1
+		);
 	
-	var_dump(DBExecute($sql));
+		$name = 'clientes';
+
+		var_dump(DBInsert('clientes', $cliente));
 	?>
 
 </body>
