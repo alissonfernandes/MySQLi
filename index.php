@@ -19,7 +19,6 @@
 	
 		$name = 'clientes';
 
-		var_dump(DBInsert('clientes', $cliente));
 	?>
 
 </body>
