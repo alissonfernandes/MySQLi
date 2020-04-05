@@ -16,8 +16,6 @@
 			'idade' => 19,
 			'status' => 1
 		);
-	
-		$name = 'clientes';
 
 	?>
 

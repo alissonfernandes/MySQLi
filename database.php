@@ -3,7 +3,7 @@
 	// Executa Querys
 	function DBExecute($SQL_query){
 		$connection = DBConnect();
-		$result = @mysqli_query($connection, $SQL_query) or die($connection);
+		$result = @mysqli_query($connection, $SQL_query) or die(mysqli_error($connection));
 		DBClose($connection);
 		return $result;
 	}
@@ -41,6 +41,24 @@
 			}
 			return $data;
 		}
+	}
+
+	// Update de dados na tabela
+	function DBUpdate($table_name, array $data, $where = null){
+		$table_name = DB_PREFIX.'_'.$table_name;// Add prefixo
+		$where = ($where) ? " {$where}":null; // Add parâmetro caso haja
+
+		foreach ($data as $key => $value) {// Percorre o array
+			$fields[] = "{$key} = '{$value}'";
+		}
+
+		$fields = implode(", ", $fields);
+
+		$SQL_query = "UPDATE {$table_name} SET {$fields}{$where}";
+
+		var_dump($SQL_query);
+		
+		return DBExecute($SQL_query);
 	}
 
 ?>
