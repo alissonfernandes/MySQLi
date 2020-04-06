@@ -11,12 +11,13 @@
 		require 'database.php';
 
 		$cliente = array(
-			'nome' => 'Lucas Silva',
-			'email' => 'lucasSilvacontato@coderwb.com' ,
-			'idade' => 19,
+			'nome' => 'Daniely Ferraz Silva',
+			'email' => 'daniferraz@coderwb.com' ,
+			'idade' => 20,
 			'status' => 1
 		);
 
+		
 	?>
 
 </body>

@@ -1,15 +1,19 @@
 <?php
 	
 	// Executa Querys
-	function DBExecute($SQL_query){
+	function DBExecute($SQL_query, $insertId){
 		$connection = DBConnect();
 		$result = @mysqli_query($connection, $SQL_query) or die(mysqli_error($connection));
+
+		if ($insertId) {
+			$result = mysqli_insert_id($connection);
+		}
 		DBClose($connection);
 		return $result;
 	}
 
 	// Inseri valores na tabela
-	function DBInsert($table_name, $data){
+	function DBInsert($table_name, $data, $insertId = false){
 		$table_name = DB_PREFIX."_".$table_name;// Adiciona prefixo
 		$data = DBEscape($data);
 
@@ -21,7 +25,7 @@
 		$SQL_query = "INSERT INTO {$table_name} ({$array_keys}) VALUES({$array_values})";
 
 
-		return DBExecute($SQL_query);
+		return DBExecute($SQL_query, $insertId);
 	}
 
 	// Selecionar dados na tabela
@@ -44,7 +48,7 @@
 	}
 
 	// Update de dados na tabela
-	function DBUpdate($table_name, array $data, $where = null){
+	function DBUpdate($table_name, array $data, $where = null, $insertId = false){
 		$table_name = DB_PREFIX.'_'.$table_name;// Add prefixo
 		$where = ($where) ? " {$where}":null; // Add parâmetro caso haja
 
@@ -55,9 +59,17 @@
 		$fields = implode(", ", $fields);
 
 		$SQL_query = "UPDATE {$table_name} SET {$fields}{$where}";
-
-		var_dump($SQL_query);
 		
+		return DBExecute($SQL_query, $insertId);
+	}
+
+	// Deleta Registros na tabela
+	function DBDelete($table_name, $where = null){
+		$table_name = DB_PREFIX.'_'.$table_name;
+		$where = ($where) ? " {$where}":null;
+
+		$SQL_query = "DELETE FROM {$table_name}{$where}";
+
 		return DBExecute($SQL_query);
 	}
 
